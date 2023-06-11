@@ -1,34 +1,46 @@
 package com.example.utils;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.Arrays;
 
+@UtilityClass
 public class Format {
+
     public static String formatPolynomial(double[] polynomial) {
-    StringBuilder formattedPolynomial = new StringBuilder();
+        StringBuilder formattedPolynomial = new StringBuilder();
 
-    for (int i = polynomial.length - 1; i >= 0; i--) {
-        double coefficient = polynomial[i];
-        if (coefficient != 0) {
-            if (formattedPolynomial.length() > 0) {
-                formattedPolynomial.append(coefficient >= 0 ? " + " : " - ");
-            }
+        int degree = polynomial.length - 1;
+        for (int i = 0; i <= degree; i++) {
+            double coefficient = polynomial[i];
+            if (coefficient != 0) {
+                if (formattedPolynomial.length() > 0) {
+                    if (coefficient >= 0) {
+                        formattedPolynomial.append(" + ");
+                    } else {
+                        formattedPolynomial.append(" - ");
+                        coefficient = Math.abs(coefficient);
+                    }
+                } else if (coefficient < 0) {
+                    formattedPolynomial.append("-");
+                    coefficient = Math.abs(coefficient);
+                }
 
-            coefficient = Math.abs(coefficient);
-            if (coefficient != 1 || i == 0) {
-                formattedPolynomial.append(coefficient);
-            }
+                if (coefficient != 1 || i == degree) {
+                    formattedPolynomial.append(coefficient);
+                }
 
-            if (i > 0) {
-                formattedPolynomial.append("x");
-                if (i > 1) {
-                    formattedPolynomial.append("^").append(i);
+                if (degree - i > 0) {
+                    formattedPolynomial.append("x");
+                    if (degree - i > 1) {
+                        formattedPolynomial.append("^").append(degree - i);
+                    }
                 }
             }
         }
-    }
 
-    return formattedPolynomial.toString();
-}
+        return formattedPolynomial.toString();
+    }
 
     public static double[] removeLeadingZeros(double[] arr) {
         int firstNonZeroIndex = 0;
