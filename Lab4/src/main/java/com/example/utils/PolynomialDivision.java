@@ -29,8 +29,9 @@ public class PolynomialDivision {
                     }
 
                     if (showSteps) {
-                        double[] formattedQuotient = Format.removeLeadingZeros(Arrays.copyOfRange(quotient, 0, i + 1));
-                        double[] formattedRemainder = Format.removeLeadingZeros(Arrays.copyOfRange(remainder, 0, i + divisorLength));
+
+                        double[] formattedQuotient = Format.removeLeadingZeros(Arrays.copyOfRange(quotient, 0, divisorLength));
+                        double[] formattedRemainder = Format.removeLeadingZeros(Arrays.copyOfRange(remainder, 0,dividendLength));
                         String formattedQuotientStr = Format.formatPolynomial(formattedQuotient);
                         String formattedRemainderStr = Format.formatPolynomial(formattedRemainder);
 
